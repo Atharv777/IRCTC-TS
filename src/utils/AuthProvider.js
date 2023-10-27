@@ -7,7 +7,7 @@ import { Web3AuthNoModal } from "@web3auth/no-modal";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 
-import { signInWithGoogle, storeUserDetails } from './firebase';
+import { signInWithGoogle, storeUserDetails, getUserDetails } from './firebase';
 
 
 const AuthContext = createContext();
@@ -38,7 +38,7 @@ export default function AuthHolder(props) {
 
         await storeUserDetails(user, address, role)
 
-        setUser(user)
+        setUser({ ...user, address, role, pastOrders: [] })
         setAddress(address)
         setConnected(true);
     }
@@ -95,13 +95,14 @@ export default function AuthHolder(props) {
 
             if (web3auth.connected) {
                 const user = await web3auth.getUserInfo();
+                const userDetails = await getUserDetails(user.verifierId)
+
                 const provider = new ethers.BrowserProvider(web3auth.provider)
                 const signer = await provider.getSigner();
                 const address = await signer.getAddress();
 
                 setAddress(address)
-                setUser(user)
-                console.log(user)
+                setUser(userDetails)
                 setConnected(true);
             }
         })();

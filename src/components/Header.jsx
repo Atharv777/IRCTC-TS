@@ -37,7 +37,7 @@ export default function Header() {
                 <Image
                     alt="IRCTC Logo"
                     src={IrctcLogo}
-                    width={150}
+                    width={110}
                 />
             </NavbarBrand>
 
@@ -51,20 +51,20 @@ export default function Header() {
                         </NavbarItem>
                     )}
                 </NavLink>
-                <NavLink to="/book" className="h-full">
+                <NavLink to="/search" className="h-full">
                     {({ isActive }) => (
                         <NavbarItem isActive={isActive} className='font-normal'>
                             <Link color={isActive ? "primary" : "foreground"}>
-                                Book
+                                Search Trains
                             </Link>
                         </NavbarItem>
                     )}
                 </NavLink>
-                <NavLink to="/login" className="h-full">
+                <NavLink to="/book" className="h-full">
                     {({ isActive }) => (
                         <NavbarItem isActive={isActive} className='font-normal'>
                             <Link color={isActive ? "primary" : "foreground"}>
-                                Customers
+                                Book Tickets
                             </Link>
                         </NavbarItem>
                     )}

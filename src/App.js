@@ -7,7 +7,6 @@ import { NextUIProvider } from "@nextui-org/react";
 import AuthHolder from './utils/AuthProvider';
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -26,46 +25,35 @@ export default function App() {
             </>
         )
     }
-    const AppendFooter = ({ Comp }) => {
-        return (
-            <>
-                <Comp />
-                <Footer />
-            </>
-        )
-    }
-    const AppendHeaderFooter = ({ Comp }) => {
-        return (
-            <>
-                <Header />
-                <Comp />
-                <Footer />
-            </>
-        )
-    }
 
-    const router = createBrowserRouter([
+    const routes = [
         {
-            path: "/",
-            element: <AppendHeaderFooter Comp={Home} />,
+            path: '/',
+            element: <AppendHeader Comp={Home} />,
         },
         {
-            path: "/book",
-            element: <AppendHeaderFooter Comp={BookTicket} />,
+            path: '/book',
+            element: <AppendHeader Comp={BookTicket} />,
         },
         {
-            path: "/login",
-            element: <AppendHeaderFooter Comp={Login} />,
+            path: '/login',
+            element: <AppendHeader Comp={Login} />,
         },
         {
-            path: "/dashboard",
-            element: <AppendHeaderFooter Comp={Dashboard} />,
+            path: '/dashboard',
+            element: <AppendHeader Comp={Dashboard} />,
         },
         {
-            path: "*",
+            path: '/dashboard/:tab',
+            element: <AppendHeader Comp={Dashboard} />,
+        },
+        {
+            path: '*',
             element: <Error404 />,
         },
-    ]);
+    ];
+
+    const router = createBrowserRouter(routes);
 
     return (
         <NextUIProvider>
