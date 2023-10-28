@@ -74,7 +74,7 @@ export default function AuthHolder(props) {
 
             const openloginAdapter = new OpenloginAdapter({
                 adapterSettings: {
-                    uxMode: "redirect",
+                    uxMode: "popup",
                     loginConfig: {
                         jwt: {
                             verifier: "irctc-firebase",
