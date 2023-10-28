@@ -17,7 +17,7 @@ export default function Sidebar({ current }) {
 
     return (
 
-        user.role === "user" || user.role === "staff"
+        user.role === "user"
             ?
             <Listbox
                 aria-label="Dashboard Menu"
@@ -89,8 +89,55 @@ export default function Sidebar({ current }) {
                     Account
                 </ListboxItem>
             </Listbox>
-            : <>
+            : user.role === "staff"
+                ? <Listbox
+                    aria-label="Dashboard Menu"
+                    onAction={(key) => navigate("/dashboard/" + key)}
+                    className="p-0 gap-0 divide-y divide-default-300/50 bg-default-100 max-w-[300px] overflow-visible shadow-small rounded-r-medium"
+                    itemClasses={{
+                        base: "px-3 first:rounded-t-medium last:rounded-b-medium rounded-none shadow bg-content1 gap-3 h-16 data-[hover=true]:bg-default-100",
+                    }}
+                >
 
-            </>
+                    <ListboxItem
+                        key="announcements"
+                        endContent={<VscChevronRight className="text-default-400 text-xl" />}
+                        startContent={
+                            <div className="border-[0.5px] border-default bg-success/10 text-success flex items-center rounded-small justify-center w-10 h-10">
+                                <TfiAnnouncement className="text-xl " />
+                            </div>
+                        }
+                        className={current === "announcements" && "bg-success-50"}
+                    >
+                        Announcements
+                    </ListboxItem>
+                    <ListboxItem
+                        key="support"
+                        endContent={<VscChevronRight className="text-default-400 text-xl" />}
+                        startContent={
+                            <div className="border-[0.5px] border-default bg-primary/10 text-primary flex items-center rounded-small justify-center w-10 h-10">
+                                <GiBroom className="text-xl " />
+                            </div>
+                        }
+                        className={current === "support" && "bg-primary-50"}
+                    >
+                        Repair & Maintenance Support
+                    </ListboxItem >
+                    <ListboxItem
+                        key="theft-report"
+                        endContent={<VscChevronRight className="text-default-400 text-xl" />}
+                        startContent={
+                            <div className="border-[0.5px] border-default bg-secondary/10 text-secondary flex items-center rounded-small justify-center w-10 h-10">
+                                <AiOutlineAlert className="text-xl " />
+                            </div>
+                        }
+                        className={current === "theft-report" && "bg-secondary-50"}
+                    >
+                        Theft Report
+                    </ListboxItem>
+                </Listbox>
+                : <>
+
+                </>
     );
 }
